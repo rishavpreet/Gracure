@@ -41,7 +41,7 @@ def get_db():
 # async def create_security_policy(sp_data: schemas.SecurityPolicyCreate, db: Session = Depends(get_db)):
 #     return await crud.create_security_policy(db=db, sp_data=sp_data)
 
-
+# ......................................................................................................... .........
 @app.post("/user_data/")
 async def create_user_data(data: schemas.UserDataCreate, db: Session = Depends(get_db)):
     return await crud.create_user_data(db=db, data=data)
@@ -52,3 +52,10 @@ async def create_user_data(data: schemas.UserDataCreate, db: Session = Depends(g
 @app.post("/duplicate_password/")
 async def create_duplicate_password(data: schemas.DuplicatePasswordCreate, db: Session = Depends(get_db)):
     return await crud.create_duplicate_password(db=db, data=data)
+
+
+# ......................................................................................................... .........
+@app.post("/audit_report/")
+async def create_audit_report(ar_data: schemas.AuditReportCreate, db: Session = Depends(get_db)):
+    return await crud.create_audit_report(db=db, ar_data=ar_data)
+# ...................................................................................................................

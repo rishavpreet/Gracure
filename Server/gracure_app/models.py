@@ -42,3 +42,13 @@ class DuplicatePassword(Base):
     username = Column(String)
     password = Column(String)
     create_date = Column(DateTime)
+
+
+class AuditReport(Base):
+    __tablename__ = "audit_report"
+
+    act_time = Column(DateTime)
+    parameter = Column(String)
+    old_value = Column(String)
+    new_value = Column(String)
+    user_ = Column(String)

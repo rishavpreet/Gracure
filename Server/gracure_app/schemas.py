@@ -22,8 +22,8 @@ class SecurityPolicyCreate(SecurityPolicyBase):
     pass
 
 
-class SecurityPolicyUpadate(BaseModel):
-    SecurityId: int
+# class SecurityPolicyUpadate(BaseModel):
+#     SecurityId: int
 
 
 class SecurityPolicy(SecurityPolicyBase):
@@ -32,6 +32,8 @@ class SecurityPolicy(SecurityPolicyBase):
     class Config:
         orm_mode = True
 
+
+# ......................................................................................................................
 
 class UserDataBase(BaseModel):
     group_level: str
@@ -55,7 +57,7 @@ class UserData(UserDataBase):
         orm_mode = True
 
 
-# .......................................................................................
+# ....................................................................................................................
 class DuplicatePasswordBase(BaseModel):
     username: str
     password: str
@@ -67,6 +69,26 @@ class DuplicatePasswordCreate(DuplicatePasswordBase):
 
 
 class DuplicatePassword(DuplicatePasswordBase):
+    pass
+
+    class Config:
+        orm_mode = True
+
+
+# .........................................................................................................................
+class AuditReportBase(BaseModel):
+    act_time: str
+    parameter: str
+    old_value: str
+    new_value: str
+    user_: str
+
+
+class AuditReportCreate(AuditReportBase):
+    pass
+
+
+class AuditReport(AuditReportBase):
     pass
 
     class Config:

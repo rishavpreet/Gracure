@@ -59,4 +59,18 @@ async def create_duplicate_password(db: Session, data: schemas.DuplicatePassword
     except Exception as e:
         print(e)
 
+
 # .........................................................................................
+async def create_audit_report(db: Session, ar_data: schemas.AuditReportCreate):
+    try:
+        db_ar = models.SecurityPolicy(act_time=ar_data.act_time, parameter=ar_data.parameter,
+                                      old_value=ar_data.old_value, new_value=ar_data.old_value,
+                                      user_=ar_data.user_)
+
+        db.add(db_ar)
+        db.commit()
+        db.refresh(db_ar)
+        return db_ar
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"{e}")
