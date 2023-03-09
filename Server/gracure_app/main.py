@@ -37,9 +37,9 @@ def get_db():
         db.close()
 
 
-@app.post("/security_policy/")
-async def create_security_policy(sp_data: schemas.SecurityPolicyCreate, db: Session = Depends(get_db)):
-    return await crud.create_security_policy(db=db, sp_data=sp_data)
+# @app.post("/security_policy/")
+# async def create_security_policy(sp_data: schemas.SecurityPolicyCreate, db: Session = Depends(get_db)):
+#     return await crud.create_security_policy(db=db, sp_data=sp_data)
 
 
 @app.post("/user_data/")
