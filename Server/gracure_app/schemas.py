@@ -77,7 +77,7 @@ class DuplicatePassword(DuplicatePasswordBase):
 
 # .........................................................................................................................
 class AuditReportBase(BaseModel):
-    act_time: str
+    act_time: datetime
     parameter: str
     old_value: str
     new_value: str
