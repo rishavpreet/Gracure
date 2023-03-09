@@ -4,6 +4,35 @@ from typing import Optional
 from pydantic import BaseModel
 
 
+class SecurityPolicyBase(BaseModel):
+    security_id: int
+    min_pass_length: int
+    pass_expiry_days: int
+    prompt_user_days: int
+    lock_in_attempt: int
+    pass_dup_count: int
+    auto_log_duration: int
+    upper_case: bool
+    lower_case: bool
+    numeric_num: bool
+    symbol: bool
+
+
+class SecurityPolicyCreate(SecurityPolicyBase):
+    pass
+
+
+class SecurityPolicyUpadate(BaseModel):
+    SecurityId: int
+
+
+class SecurityPolicy(SecurityPolicyBase):
+    SecurityId: int
+
+    class Config:
+        orm_mode = True
+
+
 class UserDataBase(BaseModel):
     group_level: str
     username: str

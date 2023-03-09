@@ -4,6 +4,23 @@ from sqlalchemy.orm import relationship
 from .database import Base
 
 
+class SecurityPolicy(Base):
+    __tablename__ = "security_policy"
+
+    id = Column(Integer, index=True, primary_key=True)
+    security_id = Column(Integer)
+    min_pass_length = Column(Integer)
+    pass_expiry_days = Column(Integer)
+    prompt_user_days = Column(Integer)
+    lock_in_attempt = Column(Integer)
+    pass_dup_count = Column(Integer)
+    auto_log_duration = Column(Integer)
+    upper_case = Column(Boolean)
+    lower_case = Column(Boolean)
+    numeric_num = Column(Boolean)
+    symbol = Column(Boolean)
+
+
 class UserData(Base):
     __tablename__ = "user_data"
 
