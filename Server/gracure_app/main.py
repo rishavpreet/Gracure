@@ -58,4 +58,10 @@ async def create_duplicate_password(data: schemas.DuplicatePasswordCreate, db: S
 @app.post("/audit_report/")
 async def create_audit_report(ar_data: schemas.AuditReportCreate, db: Session = Depends(get_db)):
     return await crud.create_audit_report(db=db, ar_data=ar_data)
+
+
 # ...................................................................................................................
+@app.post("/access_rights/")
+async def create_access_rights(ar_data: schemas.AccessRightsCreate, db: Session = Depends(get_db)):
+    return await crud.create_access_rights(db=db, ar_data=ar_data)
+# ................................................................................................................

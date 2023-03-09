@@ -93,3 +93,22 @@ class AuditReport(AuditReportBase):
 
     class Config:
         orm_mode = True
+
+
+# .....................................................................................................................
+class AccessRightsBase(BaseModel):
+    parameter: str
+    manager: bool
+    supervisor: bool
+    operator: bool
+
+
+class AccessRightsCreate(AccessRightsBase):
+    pass
+
+
+class AccessRights(AccessRightsBase):
+    pass
+
+    class Config:
+        orm_mode = True

@@ -30,6 +30,7 @@ async def create_security_policy(db: Session, sp_data: schemas.SecurityPolicyCre
         raise HTTPException(status_code=500, detail=f"{e}")
 
 
+# ....................................................................................................................
 async def create_user_data(db: Session, data: schemas.UserDataCreate):
     try:
         db_data = models.UserData(group_level=data.group_level, username=data.username,
@@ -46,7 +47,7 @@ async def create_user_data(db: Session, data: schemas.UserDataCreate):
         print(e)
 
 
-# ..........................................................................................
+# ......................................................................................................................
 async def create_duplicate_password(db: Session, data: schemas.DuplicatePasswordCreate):
     try:
         db_data = models.DuplicatePassword(username=data.username,
@@ -60,12 +61,29 @@ async def create_duplicate_password(db: Session, data: schemas.DuplicatePassword
         print(e)
 
 
-# .........................................................................................
+# .....................................................................................................................
 async def create_audit_report(db: Session, ar_data: schemas.AuditReportCreate):
     try:
         db_ar = models.AuditReport(act_time=ar_data.act_time, parameter=ar_data.parameter,
                                    old_value=ar_data.old_value, new_value=ar_data.old_value,
                                    user_=ar_data.user_)
+
+        db.add(db_ar)
+        db.commit()
+        db.refresh(db_ar)
+        return db_ar
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"{e}")
+
+
+# ......................................................................................................................
+
+async def create_access_rights(db: Session, ar_data: schemas.AccessRightsCreate):
+    try:
+        db_ar = models.AccessRights(parameter=ar_data.parameter,
+                                    manager=ar_data.manager, supervisor=ar_data.supervisor,
+                                    operator=ar_data.operator)
 
         db.add(db_ar)
         db.commit()

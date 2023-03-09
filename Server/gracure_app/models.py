@@ -53,3 +53,13 @@ class AuditReport(Base):
     old_value = Column(String)
     new_value = Column(String)
     user_ = Column(String)
+
+
+class AccessRights(Base):
+    __tablename__ = "access_rights"
+
+    id = Column(Integer, primary_key=True, index=True)
+    parameter = Column(String)
+    manager = Column(Boolean)
+    supervisor = Column(Boolean)
+    operator = Column(Boolean)
