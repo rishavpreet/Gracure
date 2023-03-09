@@ -47,6 +47,7 @@ class DuplicatePassword(Base):
 class AuditReport(Base):
     __tablename__ = "audit_report"
 
+    id = Column(Integer, primary_key=True, index=True)
     act_time = Column(DateTime)
     parameter = Column(String)
     old_value = Column(String)
