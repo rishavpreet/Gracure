@@ -35,3 +35,15 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+@app.post("/user_data/")
+async def create_user_data(data: schemas.UserDataCreate, db: Session = Depends(get_db)):
+    return await crud.create_user_data(db=db, data=data)
+
+
+# ...................................................................................................
+
+@app.post("/duplicate_password/")
+async def create_duplicate_password(data: schemas.DuplicatePasswordCreate, db: Session = Depends(get_db)):
+    return await crud.create_duplicate_password(db=db, data=data)
