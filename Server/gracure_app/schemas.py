@@ -112,3 +112,22 @@ class AccessRights(AccessRightsBase):
 
     class Config:
         orm_mode = True
+
+
+# ...................................................................................................................
+class LoginDataBase(BaseModel):
+    date_: date
+    username: str
+    login_time: datetime
+    logout_time: Optional[datetime] = None
+
+
+class LoginDataCreate(LoginDataBase):
+    pass
+
+
+class LoginData(LoginDataBase):
+    pass
+
+    class Config:
+        orm_mode = True

@@ -63,3 +63,13 @@ class AccessRights(Base):
     manager = Column(Boolean)
     supervisor = Column(Boolean)
     operator = Column(Boolean)
+
+
+class LoginData(Base):
+    __tablename__ = "login_data"
+
+    id = Column(Integer, primary_key=True, index=True)
+    date_ = Column(Date)
+    username = Column(String)
+    login_time = Column(DateTime)
+    logout_time = Column(DateTime, nullable=True)

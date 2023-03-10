@@ -92,3 +92,32 @@ async def create_access_rights(db: Session, ar_data: schemas.AccessRightsCreate)
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"{e}")
+
+
+# .....................................................................................................................
+
+async def get_login_data_by_name(db: Session, username: str):
+    try:
+        return db.query(models.LoginData).filter(models.LoginData.username == username,
+                                                 models.LoginData.logout_time.is_(None)).first()
+
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"{e}")
+
+
+async def create_login_data(db: Session, log_data: schemas.LoginDataBase):
+    try:
+        db_logged_in = await get_login_data_by_name(db, log_data.username)
+        if not db_logged_in:
+            db_master = models.LoginData(date_=log_data.date_, username=log_data.username,
+                                         login_time=log_data.login_time)
+
+            db.add(db_master)
+            db.commit()
+            db.refresh(db_master)
+            return db_master
+        else:
+            return db_logged_in
+
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"{e}")

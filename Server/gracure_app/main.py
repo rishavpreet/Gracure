@@ -64,4 +64,9 @@ async def create_audit_report(ar_data: schemas.AuditReportCreate, db: Session = 
 @app.post("/access_rights/")
 async def create_access_rights(ar_data: schemas.AccessRightsCreate, db: Session = Depends(get_db)):
     return await crud.create_access_rights(db=db, ar_data=ar_data)
+
+
 # ................................................................................................................
+@app.post("/login/")
+async def create_login_data(log_data: schemas.LoginDataCreate, db: Session = Depends(get_db)):
+    return await crud.create_login_data(db=db, log_data=log_data)
