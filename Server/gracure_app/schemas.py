@@ -125,6 +125,12 @@ class LoginDataBase(BaseModel):
 class LoginDataCreate(LoginDataBase):
     pass
 
+class LoginDataUpdate(BaseModel):
+    username: str
+    logout_time: datetime
+
+    class Config:
+        orm_mode = True
 
 class LoginData(LoginDataBase):
     pass

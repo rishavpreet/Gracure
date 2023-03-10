@@ -121,3 +121,17 @@ async def create_login_data(db: Session, log_data: schemas.LoginDataBase):
 
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"{e}")
+
+async def update_login_data(db: Session, data: schemas.LoginDataUpdate):
+    try:
+        login_data_db = await get_login_data_by_name(db, data.username)
+        mo_id = login_data_db.id
+        db_mo = db.get(models.LoginData, mo_id)
+        for key, value in data.dict(exclude_unset=True).items():
+            setattr(db_mo, key, value)
+        db.add(db_mo)
+        db.commit()
+        db.refresh(db_mo)
+        return db_mo
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"{e}")

@@ -70,3 +70,10 @@ async def create_access_rights(ar_data: schemas.AccessRightsCreate, db: Session 
 @app.post("/login/")
 async def create_login_data(log_data: schemas.LoginDataCreate, db: Session = Depends(get_db)):
     return await crud.create_login_data(db=db, log_data=log_data)
+
+@app.post("/update_login_data/")
+async def update_login_data(data: schemas.LoginDataUpdate, db: Session = Depends(get_db)):
+    db_data_c = await crud.get_login_data_by_name(db, data.username)
+    if not db_data_c:
+        raise HTTPException(status_code=404, detail="data does not exists.")
+    return await crud.update_login_data(db=db, data=data)
